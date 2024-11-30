@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: back
+  threads:
+    virtual:
+      enabled: true
