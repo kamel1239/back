@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: alaska-devices
+  threads:
+    virtual:
+      enabled: true
