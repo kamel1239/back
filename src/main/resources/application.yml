@@ -7,6 +7,11 @@ spring:
     banner-mode: off
   application:
     name: back
+  data:
+    mongodb:
+      uri: mongodb://localhost:2017
+      database: back
+      auto-index-creation: true
   threads:
     virtual:
       enabled: true

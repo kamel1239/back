@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Validated
 @RequestMapping(path = "/api/products")
-public class Permissions {
+public class ProductController {
 
     @GetMapping
     public void getPermissions() {
