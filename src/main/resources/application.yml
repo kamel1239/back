@@ -9,9 +9,12 @@ spring:
     name: back
   data:
     mongodb:
-      uri: mongodb://localhost:2017
+      uri: mongodb://localhost:27017
       database: back
       auto-index-creation: true
   threads:
     virtual:
       enabled: true
+  jackson:
+    deserialization:
+      accept-empty-string-as-null-object: true

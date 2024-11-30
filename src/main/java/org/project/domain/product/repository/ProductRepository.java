@@ -1,45 +1,47 @@
+/*
+    2024
+*/
 package org.project.domain.product.repository;
 
 import java.util.List;
 import org.project.domain.product.Exception.ProductNotFoundException;
-import org.project.domain.product.model.Product;
+import org.project.domain.product.model.ProductModel;
 
 public interface ProductRepository {
 
     /**
-     *  Save a product
+     * Save a product
      *
-     * @param product  The product to save
+     * @param productModel The product to save
      */
-    void save(Product product);
+    void save(ProductModel productModel);
 
     /**
-     *  Find a product by id
+     * Find a product by id
      *
-     * @param id  The id of the product to find
-     * @return  The product with the given id
+     * @param id The id of the product to find
+     * @return The product with the given id
      */
-    Product findById(String id) throws ProductNotFoundException;
+    ProductModel findById(String id) throws ProductNotFoundException;
 
     /**
      * Find all products
      *
-     * @return  All products
+     * @return All products
      */
-    List<Product> findAll();
+    List<ProductModel> findAll();
 
     /**
-     *  Update a product
+     * Update a product
      *
-     * @param product
-     * @return  The updated product
+     * @param productModel The updated product infos
      */
-    Product update(Product product);
+    void update(ProductModel productModel);
 
     /**
      * Delete a product by id
      *
-     * @param id  The id of the product to delete
+     * @param id The id of the product to delete
      */
     void deleteById(String id);
 
