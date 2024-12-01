@@ -4,12 +4,13 @@
 
 package org.project.infrastructure.persistence.mapper;
 
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.project.domain.product.model.ProductModel;
 import org.project.infrastructure.persistence.model.ProductEntity;
 import org.springframework.lang.NonNull;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ProductEntityModelMapper {
 
     /**

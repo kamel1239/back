@@ -1,4 +1,12 @@
+/*
+  2024
+*/
 package org.project.application.handler.impl;
 
-public class UserHandlerimpl {
+import org.project.application.handler.UserHandler;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserHandlerImpl implements UserHandler
+
 }

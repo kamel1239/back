@@ -3,6 +3,6 @@
 */
 package org.project.infrastructure.api.entity;
 
-public record ApiUserCreateEntity(String username, String password, String role) {
+public record ApiUserEntity(String username, String password, String role) {
 
 }

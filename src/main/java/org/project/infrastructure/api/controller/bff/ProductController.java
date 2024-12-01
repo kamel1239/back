@@ -1,7 +1,7 @@
 /*
   2024
 */
-package org.project.infrastructure.api.controller.external;
+package org.project.infrastructure.api.controller.bff;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -30,15 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Validated
 @RequestMapping(path = "/api/products")
-@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST,
-    RequestMethod.DELETE, RequestMethod.PATCH})
 public class ProductController {
 
     @Autowired
     private ProductHandler productHandler;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ApiProductEntity> getProduct(@PathVariable String id)
+    public ResponseEntity<ApiProductEntity> getProduct(@PathVariable long id)
         throws ProductNotFoundException {
         log.info("Getting product with id {}", id);
         return ResponseEntity.ok(ApiProductModelMapper.toInfra(productHandler.getProduct(id)));
