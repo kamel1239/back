@@ -7,11 +7,9 @@ spring:
     banner-mode: off
   application:
     name: alaska-devices
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017
-      database: back
-      auto-index-creation: true
+  h2:
+    console:
+      enabled=true:
   threads:
     virtual:
       enabled: true

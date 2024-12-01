@@ -1,7 +1,7 @@
 /*
   2024
 */
-package org.project.infrastructure.api.dto;
+package org.project.infrastructure.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

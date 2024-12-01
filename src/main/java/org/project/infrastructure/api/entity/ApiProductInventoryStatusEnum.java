@@ -1,7 +1,7 @@
 /*
   2024
 */
-package org.project.infrastructure.api.dto;
+package org.project.infrastructure.api.entity;
 
 public enum ApiProductInventoryStatusEnum {
     INSTOCK,

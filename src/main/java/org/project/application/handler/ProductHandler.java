@@ -5,7 +5,7 @@ package org.project.application.handler;
 
 import java.util.List;
 import org.project.application.dto.ProductDTO;
-import org.project.domain.product.Exception.ProductNotFoundException;
+import org.project.domain.product.exception.ProductNotFoundException;
 
 public interface ProductHandler {
 
@@ -15,7 +15,7 @@ public interface ProductHandler {
      * @param productDTO the product data transfer object containing the details of the product to
      *                   be created
      */
-    void createProduct(ProductDTO productDTO);
+    ProductDTO createProduct(ProductDTO productDTO);
 
     /**
      * Updates an existing product.
@@ -23,7 +23,7 @@ public interface ProductHandler {
      * @param productDTO the product data transfer object containing the updated details of the
      *                   product
      */
-    void updateProduct(String id, ProductDTO productDTO);
+    ProductDTO updateProduct(ProductDTO productDTO);
 
     /**
      * Retrieves a product by its ID.
@@ -45,6 +45,6 @@ public interface ProductHandler {
      *
      * @param id the ID of the product to be deleted
      */
-    void deleteProduct(String id);
+    void deleteProduct(long id);
 
 }

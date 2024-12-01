@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.project.application.dto.ProductDTO;
 import org.project.application.handler.ProductHandler;
 import org.project.application.mapper.ProductDTOMapper;
-import org.project.domain.product.Exception.ProductNotFoundException;
+import org.project.domain.product.exception.ProductNotFoundException;
 import org.project.domain.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,15 +21,17 @@ public class ProductHandlerImpl implements ProductHandler {
     private ProductRepository productRepository;
 
     @Override
-    public void createProduct(ProductDTO productDTO) {
+    public ProductDTO createProduct(ProductDTO productDTO) {
         log.info("Creating product with name {}", productDTO.name());
-        productRepository.save(ProductDTOMapper.toDomain(productDTO));
+        return ProductDTOMapper.toApp(
+            productRepository.save(ProductDTOMapper.toDomain(productDTO)));
     }
 
     @Override
-    public void updateProduct(String id, ProductDTO productDTO) {
+    public ProductDTO updateProduct(ProductDTO productDTO) {
         log.info("Updating product with id {}", productDTO.id());
-        productRepository.update(ProductDTOMapper.toDomain(productDTO));
+        return ProductDTOMapper.toApp(
+            productRepository.update(ProductDTOMapper.toDomain(productDTO)));
     }
 
     @Override
@@ -40,12 +42,12 @@ public class ProductHandlerImpl implements ProductHandler {
 
     @Override
     public List<ProductDTO> getProducts() {
-        log.info("Getting products");
+        log.info("Find all products");
         return productRepository.findAll().stream().map(ProductDTOMapper::toApp).toList();
     }
 
     @Override
-    public void deleteProduct(String id) {
+    public void deleteProduct(long id) {
         log.info("Deleting product with id {}", id);
         productRepository.deleteById(id);
     }
