@@ -16,3 +16,5 @@ spring:
   jackson:
     deserialization:
       accept-empty-string-as-null-object: true
+jwt:
+  secret: 455e34f96c1357992e8cc341b02d76769aff9c81527537665360fcee5dd1e5ca

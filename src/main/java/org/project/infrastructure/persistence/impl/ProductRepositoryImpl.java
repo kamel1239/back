@@ -29,7 +29,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public ProductModel findById(String id) throws ProductNotFoundException {
+    public ProductModel findById(long id) throws ProductNotFoundException {
         log.info("Finding product by id {}", id);
         return jpaProductRepository.findById(id).map(ProductEntityModelMapper::toDomain)
             .orElseThrow(() -> new ProductNotFoundException(
@@ -54,7 +54,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void deleteById(long id) {
         log.info("Deleting product by id {}", id);
-        jpaProductRepository.deleteById(String.valueOf(id));
+        jpaProductRepository.deleteById(id);
     }
 
 }

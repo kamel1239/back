@@ -31,7 +31,7 @@ public interface ProductHandler {
      * @param id the ID of the product to be retrieved
      * @return the product data transfer object of the retrieved product
      */
-    ProductDTO getProduct(String id) throws ProductNotFoundException;
+    ProductDTO getProduct(long id) throws ProductNotFoundException;
 
     /**
      * Retrieves a list of all products.
