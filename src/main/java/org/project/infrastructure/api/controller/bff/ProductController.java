@@ -7,8 +7,10 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.project.application.handler.ProductHandler;
-import org.project.domain.product.Exception.ProductNotFoundException;
-import org.project.infrastructure.api.dto.ApiProductModel;
+import org.project.domain.product.exception.ProductNotFoundException;
+import org.project.infrastructure.api.entity.ApiCreateProductEntity;
+import org.project.infrastructure.api.entity.ApiPatchProductEntity;
+import org.project.infrastructure.api.entity.ApiProductEntity;
 import org.project.infrastructure.api.mapper.ApiProductModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,35 +38,40 @@ public class ProductController {
     private ProductHandler productHandler;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ApiProductModel> getProduct(@PathVariable String id)
+    public ResponseEntity<ApiProductEntity> getProduct(@PathVariable String id)
         throws ProductNotFoundException {
         log.info("Getting product with id {}", id);
         return ResponseEntity.ok(ApiProductModelMapper.toInfra(productHandler.getProduct(id)));
     }
 
     @GetMapping
-    public ResponseEntity<List<ApiProductModel>> getProducts() {
-        log.info("Getting products");
+    public ResponseEntity<List<ApiProductEntity>> getProducts() {
+        log.info("Find all products");
         return ResponseEntity.ok(
             productHandler.getProducts().stream().map(ApiProductModelMapper::toInfra).toList());
     }
 
     @PostMapping
-    public void createProduct(@Valid @RequestBody ApiProductModel product) {
-        log.info("Creating product");
-        productHandler.createProduct(ApiProductModelMapper.toApp(product));
+    public ResponseEntity<ApiProductEntity> createProduct(
+        @Valid @RequestBody ApiCreateProductEntity createProduct) {
+        log.info("Creating product with name {}", createProduct.getName());
+        return ResponseEntity.ok(ApiProductModelMapper.toInfra(
+            productHandler.createProduct(ApiProductModelMapper.toApp(createProduct))));
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteProduct(@PathVariable String id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable long id) {
         log.info("Deleting product with id {}", id);
         productHandler.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping(path = "/{id}")
-    public void patchProduct(@PathVariable String id, @Valid @RequestBody ApiProductModel product) {
-        log.info("Patching product with id {}", product.id());
-        productHandler.updateProduct(id, ApiProductModelMapper.toApp(product));
+    public ResponseEntity<ApiProductEntity> patchProduct(@PathVariable long id,
+        @Valid @RequestBody ApiPatchProductEntity patchProduct) {
+        log.info("Patching product with id {}", id);
+        return ResponseEntity.ok(ApiProductModelMapper.toInfra(
+            productHandler.updateProduct(ApiProductModelMapper.toApp(id, patchProduct))));
     }
 
 }

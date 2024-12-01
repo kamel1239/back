@@ -4,7 +4,7 @@
 package org.project.domain.product.repository;
 
 import java.util.List;
-import org.project.domain.product.Exception.ProductNotFoundException;
+import org.project.domain.product.exception.ProductNotFoundException;
 import org.project.domain.product.model.ProductModel;
 
 public interface ProductRepository {
@@ -14,7 +14,7 @@ public interface ProductRepository {
      *
      * @param productModel The product to save
      */
-    void save(ProductModel productModel);
+    ProductModel save(ProductModel productModel);
 
     /**
      * Find a product by id
@@ -36,13 +36,13 @@ public interface ProductRepository {
      *
      * @param productModel The updated product infos
      */
-    void update(ProductModel productModel);
+    ProductModel update(ProductModel productModel);
 
     /**
      * Delete a product by id
      *
      * @param id The id of the product to delete
      */
-    void deleteById(String id);
+    void deleteById(long id);
 
 }

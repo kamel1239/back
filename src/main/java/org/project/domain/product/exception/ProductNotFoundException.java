@@ -2,7 +2,7 @@
   2024
 */
 
-package org.project.domain.product.Exception;
+package org.project.domain.product.exception;
 
 public class ProductNotFoundException extends Exception {
 

@@ -4,11 +4,11 @@
 package org.project.domain.product.model;
 
 import java.time.Instant;
-import org.project.infrastructure.api.dto.ApiProductInventoryStatusEnum;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 /**
+ * TODO  add properly enums
  * Represents a product model with various attributes.
  *
  * @param id                the unique identifier of the product
@@ -26,11 +26,10 @@ import org.springframework.lang.Nullable;
  * @param createdAt         the creation timestamp of the product
  * @param updatedAt         the last update timestamp of the product
  */
-public record ProductModel(String id, String code, String name, String description, String image,
+public record ProductModel(Long id, String code, String name, String description, String image,
                            String category, @Nullable Double price, int quantity,
-                           String internalReference, int shellId,
-                           @NonNull ApiProductInventoryStatusEnum inventoryStatus, double rating,
-                           Instant createdAt, Instant updatedAt) {
+                           String internalReference, int shellId, @NonNull String inventoryStatus,
+                           double rating, Instant createdAt, Instant updatedAt) {
 
     /**
      * Constructs a new ProductModel with the specified attributes.
@@ -41,9 +40,10 @@ public record ProductModel(String id, String code, String name, String descripti
      * @param price       the price of the product
      * @param category    the category of the product as a string
      */
-    public ProductModel(String id, String name, String description, Double price, String category) {
-        this(id, null, name, description, null, category, price, 0, null, 0,
-            ApiProductInventoryStatusEnum.OUTOFSTOCK, 0.0, Instant.now(), Instant.now());
+    public ProductModel(Long id, String name, String description, Double price, String category,
+        String inventoryStatus) {
+        this(id, null, name, description, null, category, price, 0, null, 0, inventoryStatus, 0.0,
+            null, null);
     }
 
 
