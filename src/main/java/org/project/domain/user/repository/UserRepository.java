@@ -8,6 +8,8 @@ import org.project.domain.user.model.UserModel;
 
 public interface UserRepository {
 
+    UserModel save(UserModel userModel);
+
     UserModel findUser(String username) throws UserNotFoundException;
 
 

@@ -19,7 +19,8 @@ public final class UserEntityModelMapper {
     }
 
     public static UserEntity toInfra(UserModel userModel) {
-        return new UserEntity(null, userModel.username(), userModel.password(), userModel.role());
+        return new UserEntity(null, userModel.getUsername(), userModel.getPassword(),
+            userModel.getRole());
     }
 
 }
