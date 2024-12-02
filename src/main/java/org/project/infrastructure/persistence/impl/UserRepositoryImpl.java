@@ -3,7 +3,7 @@
 */
 package org.project.infrastructure.persistence.impl;
 
-import org.project.domain.user.Exception.UserNotFoundException;
+import org.project.domain.user.exception.UserNotFoundException;
 import org.project.domain.user.model.UserModel;
 import org.project.domain.user.repository.UserRepository;
 import org.project.infrastructure.persistence.mapper.UserEntityModelMapper;

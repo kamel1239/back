@@ -43,5 +43,4 @@ public class AuthConfig {
         return new BCryptPasswordEncoder();
     }
 
-
 }
