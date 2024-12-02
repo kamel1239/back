@@ -35,7 +35,7 @@ public class ProductHandlerImpl implements ProductHandler {
     }
 
     @Override
-    public ProductDTO getProduct(String id) throws ProductNotFoundException {
+    public ProductDTO getProduct(long id) throws ProductNotFoundException {
         log.info("Getting product with id {}", id);
         return ProductDTOMapper.toApp(productRepository.findById(id));
     }

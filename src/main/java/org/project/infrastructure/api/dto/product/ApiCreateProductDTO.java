@@ -2,7 +2,7 @@
   2024
 */
 
-package org.project.infrastructure.api.entity;
+package org.project.infrastructure.api.dto.product;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +15,7 @@ import org.springframework.lang.Nullable;
  */
 @AllArgsConstructor
 @Getter
-public class ApiCreateProductEntity {
+public class ApiCreateProductDTO {
 
     private final @NotEmpty String name;
     private final String description;

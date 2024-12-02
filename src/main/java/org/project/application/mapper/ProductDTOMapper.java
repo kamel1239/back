@@ -3,12 +3,13 @@
 */
 package org.project.application.mapper;
 
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.project.application.dto.ProductDTO;
 import org.project.domain.product.model.ProductModel;
 import org.springframework.lang.NonNull;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductDTOMapper {
 
     /**

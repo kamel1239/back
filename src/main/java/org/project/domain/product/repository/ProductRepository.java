@@ -22,7 +22,7 @@ public interface ProductRepository {
      * @param id The id of the product to find
      * @return The product with the given id
      */
-    ProductModel findById(String id) throws ProductNotFoundException;
+    ProductModel findById(long id) throws ProductNotFoundException;
 
     /**
      * Find all products
