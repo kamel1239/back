@@ -18,6 +18,12 @@ public class UserRepositoryImpl implements UserRepository {
     private JpaUserRepository jpaUserRepository;
 
     @Override
+    public UserModel save(UserModel userModel) {
+        return UserEntityModelMapper.toDomain(
+            jpaUserRepository.save(UserEntityModelMapper.toInfra(userModel)));
+    }
+
+    @Override
     public UserModel findUser(String username) throws UserNotFoundException {
         return jpaUserRepository.findByUsername(username).map(UserEntityModelMapper::toDomain)
             .orElseThrow(() -> new UserNotFoundException(
