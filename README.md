@@ -27,6 +27,8 @@ mvn spring-boot:run
 
 ## Example Endpoints
 
+Server runs on `http://localhost:8080`.
+
 ### User Authentication (Unsecured for Simplicity)
 
 #### Login

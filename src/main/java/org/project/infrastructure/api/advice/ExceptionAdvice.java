@@ -11,12 +11,21 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 @Slf4j
 public class ExceptionAdvice {
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
+        MethodArgumentNotValidException exception) {
+        // TODO hide internal code path when parsing error
+        var errorResponse = new ErrorResponse("400", exception.getMessage());
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     protected ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(
@@ -34,7 +43,9 @@ public class ExceptionAdvice {
     @ExceptionHandler(value = UserNotFoundException.class)
     protected ResponseEntity<ErrorResponse> handleUserNotFoundException(
         UserNotFoundException exception) {
-        return ResponseEntity.notFound().build();
+        // TODO handle user not found exception
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+            .body(new ErrorResponse("403", "Bad credentials"));
     }
 
     @ExceptionHandler(value = DataIntegrityViolationException.class)
