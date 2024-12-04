@@ -4,6 +4,8 @@
 package org.project.infrastructure.api.config;
 
 import java.util.List;
+import org.project.infrastructure.api.advice.SecurityAdvice;
+import org.project.infrastructure.api.filter.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +28,8 @@ public class SecurityConfig {
     private JwtAuthFilter jwtAuthFilter;
     @Autowired
     private AuthenticationProvider authenticationProvider;
+    @Autowired
+    private SecurityAdvice securityAdvice;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -41,6 +45,8 @@ public class SecurityConfig {
             }).sessionManagement(
                 session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider)
+            .exceptionHandling(e -> e.accessDeniedHandler(securityAdvice))
+            .exceptionHandling(e -> e.authenticationEntryPoint(securityAdvice))
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
