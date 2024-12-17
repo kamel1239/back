@@ -38,7 +38,8 @@ public class SecurityConfig {
             .cors(c -> c.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(request -> {
                 // For products management we need to be authenticated
-                request.requestMatchers("/api/products/**");
+                request.requestMatchers("/api/products/**").authenticated();
+                request.requestMatchers("/api/auth/logout/**").authenticated();
                 // TODO Just to be able to create users without authentication
                 request.requestMatchers("/api/auth/**").permitAll();
                 request.anyRequest().authenticated();

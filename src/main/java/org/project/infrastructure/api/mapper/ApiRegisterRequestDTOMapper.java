@@ -14,5 +14,5 @@ public final class ApiRegisterRequestDTOMapper {
         return new UserDTO(apiRegisterRequestDTO.username(), apiRegisterRequestDTO.password(),
             apiRegisterRequestDTO.role().name());
     }
-    
+
 }

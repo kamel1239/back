@@ -11,7 +11,7 @@ import org.project.infrastructure.persistence.model.ProductEntity;
 import org.springframework.lang.NonNull;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ProductEntityModelMapper {
+public final class ProductEntityMapper {
 
     /**
      * Converts a ProductEntity to a ProductModel.

@@ -43,22 +43,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         //  Check if the username is valid and authentication status
         final var jwt = authorizationHeader.substring(7);
         try {
-            final var username = authService.extractUsername(jwt);
-            if (username != null
-                && SecurityContextHolder.getContext().getAuthentication() == null) {
-                var user = userRepository.findUser(username);
-                if (authService.isTokenValid(jwt, user)) {
-                    //  Set the authentication in the context
-                    var authentication = new UsernamePasswordAuthenticationToken(user, null,
-                        user.getAuthorities());
-                    authentication.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
+            final var tokenInfoModel = authService.extractTokenInfo(jwt);
+            if (SecurityContextHolder.getContext().getAuthentication() == null
+                && !tokenInfoModel.isExpired()) {
+                var user = userRepository.findUserByToken(tokenInfoModel);
+                //  Set the authentication in the context
+                user.setCurrentSessionId(tokenInfoModel.id());
+                var authentication = new UsernamePasswordAuthenticationToken(user, null,
+                    user.getAuthorities());
+                authentication.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            // TODO specify which exception
-            log.error("Cannot set user authentication: {}", e.getMessage());
+            log.warn("Cannot set user authentication due to exception of type {} and message : {}",
+                e.getClass(), e.getMessage());
         }
         filterChain.doFilter(request, response);
     }

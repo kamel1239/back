@@ -1,7 +1,6 @@
 package org.project.infrastructure.api.advice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -10,14 +9,11 @@ import org.project.infrastructure.api.dto.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
 @Component("AuthenticationEntryPoint")
@@ -31,8 +27,8 @@ public class SecurityAdvice implements AuthenticationEntryPoint, AccessDeniedHan
         AuthenticationException exception) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        response.getWriter().write(
-            objectMapper.writeValueAsString(new ErrorResponse("403", exception.getMessage())));
+        response.getWriter().write(objectMapper.writeValueAsString(
+            new ErrorResponse(HttpStatus.FORBIDDEN, exception.getMessage())));
     }
 
     @Override
@@ -41,22 +37,7 @@ public class SecurityAdvice implements AuthenticationEntryPoint, AccessDeniedHan
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.getWriter().write(objectMapper.writeValueAsString(
-            new ErrorResponse("403", accessDeniedException.getMessage())));
-    }
-
-    @ExceptionHandler(value = MalformedJwtException.class)
-    protected ResponseEntity<ErrorResponse> handleMalformedJwtException(
-        MalformedJwtException exception) {
-        // TODO
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-            .body(new ErrorResponse("401", exception.getMessage()));
-    }
-
-    @ExceptionHandler(value = UsernameNotFoundException.class)
-    protected ResponseEntity<ErrorResponse> handleUsernameNotFoundException(
-        UsernameNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-            .body(new ErrorResponse("401", exception.getMessage()));
+            new ErrorResponse(HttpStatus.FORBIDDEN, accessDeniedException.getMessage())));
     }
 
 }

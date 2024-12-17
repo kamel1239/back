@@ -3,14 +3,13 @@
 */
 package org.project.domain.user.service;
 
+import org.project.domain.user.model.TokenInfoModel;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface AuthService {
 
-    String extractUsername(String token);
+    TokenInfoModel extractTokenInfo(String token);
 
-    String generateToken(UserDetails userDetails);
-
-    boolean isTokenValid(String token, UserDetails userDetails);
+    TokenInfoModel generateToken(UserDetails userDetails);
 
 }
