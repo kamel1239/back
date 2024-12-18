@@ -8,5 +8,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record ApiRegisterRequestDTO(@NotEmpty String username, @NotEmpty String password,
                                     @NotNull ApiUserRoleEnum role) {
-    // Default role is user
+
+
 }

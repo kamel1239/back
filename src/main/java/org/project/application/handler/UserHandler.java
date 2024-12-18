@@ -13,4 +13,8 @@ public interface UserHandler {
 
     String register(UserDTO userDTO);
 
+    void logoutFromAllSessions(String username);
+
+    void logoutFromSession(String username, String tokenId);
+
 }
